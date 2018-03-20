@@ -63,7 +63,7 @@ class main:
         file.close()
 
     def saveAlarmToFile(self, alarm):
-        file = open(self.__fileName, "w")
+        file = open(self.__saveFileName, "w")
         file.write(alarm)
         file.close()
 
