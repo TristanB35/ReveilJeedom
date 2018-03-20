@@ -32,7 +32,7 @@ class UDPReceiver(Thread):
                         alarm="0"+alarm[0]+":"+alarm[1:3]
                     else:
                         alarm=alarm[0:2]+":"+alarm[2:4]
-                    self.updateAlarm(user, alarm)
+                    self.updateAlarm(alarm)
                 
                 elif m[0] == "setActivation":
                     isActivated=m[2]
@@ -43,18 +43,14 @@ class UDPReceiver(Thread):
                     self.__parent.setIsActivated(isActivated)
                 
                 elif m[0] == "setBrightness":
-                    self.__parent.getDisplay().setBrightness(int(m[2]))
+                    self.__parent.getDisplay().setBrightness(float(m[2])/100.0)
                 elif m[0] == "setVolume":
                     continue
 
-    def updateAlarm(self, user, alarm):
-        if user == "tristan":
-            self.__parent.saveAlarmToFile(alarm)
-            self.__display.setAlarm(alarm)
-            self.__display.setWhatToDisplay("alarm")
-            time.sleep(5)
-            self.__display.setWhatToDisplay("clock")
-        elif user == "stop":
-            self.__display.setWhatToDisplay("stop")
-            sys.exit()
+    def updateAlarm(self, alarm):
+        self.__parent.saveAlarmToFile(alarm)
+        self.__display.setAlarm(alarm)
+        self.__display.setWhatToDisplay("alarm")
+        time.sleep(5)
+        self.__display.setWhatToDisplay("clock")
             

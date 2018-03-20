@@ -42,6 +42,8 @@ class Display(Thread):
             elif self.__whatToDisplay == "alarm":
                 #print(self.__alarm)
                 scrollphathd.write_string(self.__alarm, x=0, y=0, font=font3x5, brightness=self.__brightness)
+            if int(time.time()) % 2 == 0:
+                scrollphathd.clear_rect(8, 0, 1, 5)
             scrollphathd.show()
             time.sleep(0.1)
 

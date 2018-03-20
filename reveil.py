@@ -37,10 +37,10 @@ class main:
         
         while True:
             self.__time = time.strftime("%H:%M")
-            if int(time.strftime("%S"))%2 == 0:
-                self.__display.setTime(time.strftime("%H:%M"))
-            else:
-                self.__display.setTime(time.strftime("%H %M"))
+            #if int(time.strftime("%S"))%2 == 0:
+            self.__display.setTime(time.strftime("%H:%M"))
+            #else:
+            #    self.__display.setTime(time.strftime("%H %M"))
 
             if self.__time == self.__alarm[0:5] and self.__alarmIsActivated and not self.__alarmIsRunning:
                 self.__alarmIsRunning = True
@@ -67,7 +67,7 @@ class main:
         file.write(alarm)
         file.close()
 
-    def getDisplay(self)
+    def getDisplay(self):
         return self.__display()
 
     def setAlarm(self, alarm):
