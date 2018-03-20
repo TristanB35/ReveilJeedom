@@ -6,7 +6,7 @@ import sys, os
 from threading import Thread
 
 import scrollphathd
-from scrollphathd.fonts import font5x5
+from scrollphathd.fonts import font3x5
 
 class Display(Thread):
 
