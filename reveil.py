@@ -67,8 +67,8 @@ class main:
         file.write(alarm)
         file.close()
 
-    def getDisplay(self):
-        return self.__display()
+    def setBrightness(self, brightness):
+        self.__display.setBrightness(brightness)
 
     def setAlarm(self, alarm):
         self.__alarm = alarm
