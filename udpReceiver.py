@@ -23,18 +23,29 @@ class UDPReceiver(Thread):
             s.bind(('',12345))
             m=s.recvfrom(1024)
             m=m[0].split(";")
-            if m[0] == "setAlarm":
-                user=m[1]
-                alarm=m[2]
-                if len(alarm) == 3:
-                    alarm="0"+alarm[0]+":"+alarm[1:3]
-                else:
-                    alarm=alarm[0:2]+":"+alarm[2:4]
-                self.updateAlarm(user, alarm)
-            elif m[0] == "setBrightness":
-                continue
-            elif m[0] == "setVolume":
-                continue
+            user=m[1]
+
+            if user == self.__parent.getUser():
+                if m[0] == "setAlarm":
+                    alarm=m[2]
+                    if len(alarm) == 3:
+                        alarm="0"+alarm[0]+":"+alarm[1:3]
+                    else:
+                        alarm=alarm[0:2]+":"+alarm[2:4]
+                    self.updateAlarm(user, alarm)
+                
+                elif m[0] == "setActivation":
+                    isActivated=m[2]
+                    if isActivated == 'True':
+                        isActivated = True
+                    else:
+                        isActivated = False
+                    self.__parent.setIsActivated(isActivated)
+                
+                elif m[0] == "setBrightness":
+                    continue
+                elif m[0] == "setVolume":
+                    continue
 
     def updateAlarm(self, user, alarm):
         if user == "tristan":

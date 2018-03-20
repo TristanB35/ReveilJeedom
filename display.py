@@ -5,6 +5,8 @@ import time
 import sys, os
 from threading import Thread
 
+import scrollphathd
+from scrollphathd.fonts import font5x5
 
 class Display(Thread):
 
@@ -33,12 +35,14 @@ class Display(Thread):
     def printTime(self):
         while True:
             #os.system('clear')
+            scrollphathd.clear()
             if self.__whatToDisplay == "clock":
-                print(self.__time)
+                #print(self.__time)
+                scrollphathd.write_string(self.__time, x=0, y=0, font=font5x5, brightness=self.__brightness)
             elif self.__whatToDisplay == "alarm":
-                print(self.__alarm)
-            else:
-                sys.exit()
+                #print(self.__alarm)
+                scrollphathd.write_string(self.__alarm, x=0, y=0, font=font5x5, brightness=self.__brightness)
+            scrollphathd.show()
             time.sleep(0.1)
 
     

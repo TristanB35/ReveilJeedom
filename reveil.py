@@ -10,15 +10,20 @@ from alarm import Alarm
 class main:
 
     def __init__(self):
-        self.__fileName = "alarm.txt"
+        self.__user = ""
+        self.__configFileName = "config.txt"
+        self.__saveFileName = "alarm.txt"
         self.__time = None
         self.__alarm = "00:00"
         self.__volume = 0.1
         self.__brightness = 0.1
+        self.__alarmIsActivated = False
         self.__alarmIsRunning = False
         
         self.__display = Display()
         self.__display.start()
+        self.readConfigFile()
+        print("User is set to "+self.__user)
         self.readAlarmFromFile()
         print("Alarm is set at "+self.__alarm)
         
@@ -37,7 +42,7 @@ class main:
             else:
                 self.__display.setTime(time.strftime("%H %M"))
 
-            if self.__time == self.__alarm[0:5] and not self.__alarmIsRunning:
+            if self.__time == self.__alarm[0:5] and self.__alarmIsActivated and not self.__alarmIsRunning:
                 self.__alarmIsRunning = True
                 self.__alarmManager.playAlarm()
 
@@ -47,8 +52,12 @@ class main:
                 
             time.sleep(0.5)
 
+    def readConfigFile(self):
+        file = open(self.__configFileName, "r")
+        self.__user = file.read()
+
     def readAlarmFromFile(self):
-        file = open(self.__fileName, "r")
+        file = open(self.__saveFileName, "r")
         self.__alarm = file.read()[0:5]
         self.__display.setAlarm(self.__alarm)
         file.close()
@@ -60,6 +69,12 @@ class main:
 
     def setAlarm(self, alarm):
         self.__alarm = alarm
+
+    def setIsActivated(self, isActivated):
+        self.__alarmIsActivated = isActivated
+
+    def getUser(self):
+        return self.__user
 
 if __name__ == "__main__":
     main()
