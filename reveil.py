@@ -54,11 +54,11 @@ class main:
 
     def readConfigFile(self):
         file = open(self.__configFileName, "r")
-        self.__user = file.read()
+        self.__user = file.read()[:-1]
 
     def readAlarmFromFile(self):
         file = open(self.__saveFileName, "r")
-        self.__alarm = file.read()[0:5]
+        self.__alarm = file.read()[:-1]
         self.__display.setAlarm(self.__alarm)
         file.close()
 
