@@ -38,7 +38,7 @@ class main:
         while True:
             self.__time = time.strftime("%H:%M")
             if int(time.strftime("%S"))%2 == 0:
-                self.__display.setTime(self.__time)
+                self.__display.setTime(time.strftime("%H:%M"))
             else:
                 self.__display.setTime(time.strftime("%H %M"))
 
@@ -66,6 +66,9 @@ class main:
         file = open(self.__fileName, "w")
         file.write(alarm)
         file.close()
+
+    def getDisplay()
+        return self.__display()
 
     def setAlarm(self, alarm):
         self.__alarm = alarm

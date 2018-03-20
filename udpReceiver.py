@@ -43,7 +43,7 @@ class UDPReceiver(Thread):
                     self.__parent.setIsActivated(isActivated)
                 
                 elif m[0] == "setBrightness":
-                    continue
+                    self.__parent.getDisplay().setBrightness(int(m[2]))
                 elif m[0] == "setVolume":
                     continue
 

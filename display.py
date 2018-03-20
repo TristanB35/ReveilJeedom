@@ -16,7 +16,7 @@ class Display(Thread):
     def run(self):
         self.__time = "00:00"
         self.__alarm = "01:00"
-        self.__brightness = 1.0
+        self.__brightness = 0.1
         self.__whatToDisplay = "clock"
         self.printTime()
 
@@ -38,10 +38,10 @@ class Display(Thread):
             scrollphathd.clear()
             if self.__whatToDisplay == "clock":
                 #print(self.__time)
-                scrollphathd.write_string(self.__time, x=0, y=0, font=font5x5, brightness=self.__brightness)
+                scrollphathd.write_string(self.__time, x=0, y=0, font=font3x5, brightness=self.__brightness)
             elif self.__whatToDisplay == "alarm":
                 #print(self.__alarm)
-                scrollphathd.write_string(self.__alarm, x=0, y=0, font=font5x5, brightness=self.__brightness)
+                scrollphathd.write_string(self.__alarm, x=0, y=0, font=font3x5, brightness=self.__brightness)
             scrollphathd.show()
             time.sleep(0.1)
 
