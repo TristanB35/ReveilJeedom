@@ -58,7 +58,7 @@ class main:
 
     def readAlarmFromFile(self):
         file = open(self.__saveFileName, "r")
-        self.__alarm = file.read()[:-1]
+        self.__alarm = file.read()[0:5]
         self.__display.setAlarm(self.__alarm)
         file.close()
 
