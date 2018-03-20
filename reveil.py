@@ -67,7 +67,7 @@ class main:
         file.write(alarm)
         file.close()
 
-    def getDisplay()
+    def getDisplay(self)
         return self.__display()
 
     def setAlarm(self, alarm):
