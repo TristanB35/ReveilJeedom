@@ -12,6 +12,7 @@ class Display(Thread):
 
     def __init__(self):
         Thread.__init__(self)
+        scrollphathd.rotate(180)
         
     def run(self):
         self.__time = "00:00"

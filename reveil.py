@@ -17,7 +17,7 @@ class main:
         self.__alarm = "00:00"
         self.__volume = 0.1
         self.__brightness = 0.1
-        self.__alarmIsActivated = False
+        self.__alarmIsActivated = True
         self.__alarmIsRunning = False
         
         self.__display = Display()
@@ -37,10 +37,7 @@ class main:
         
         while True:
             self.__time = time.strftime("%H:%M")
-            #if int(time.strftime("%S"))%2 == 0:
             self.__display.setTime(time.strftime("%H:%M"))
-            #else:
-            #    self.__display.setTime(time.strftime("%H %M"))
 
             if self.__time == self.__alarm[0:5] and self.__alarmIsActivated and not self.__alarmIsRunning:
                 self.__alarmIsRunning = True
