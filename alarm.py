@@ -6,10 +6,8 @@ from threading import Thread
 
 class Alarm(Thread):
 
-
-    def __init__(self, parent):
+    def __init__(self):
         Thread.__init__(self)
-        self.__parent = parent
 
     def run(self):
         pygame.mixer.init()
