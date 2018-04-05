@@ -2,6 +2,8 @@
 #-*- coding: utf-8 -*-
 
 import time
+from datetime import datetime
+from datetime import timedelta
 
 from display import Display
 from udpReceiver import UDPReceiver
@@ -50,11 +52,11 @@ class main:
             if (self.__time == self.__alarm[0:5] or datetime.now() == self.__snoozeTime) and self.__alarmIsActivated and self.__alarmIsStopped and not self.__alarmIsRunning and not self.__alarmIsPaused:
                 self.__alarmIsRunning = True
                 self.__alarmManager.playAlarm()
-                self.__snoozeTime = datetime.now() + datetime.delta(minutes=9)
 
             #Pausing the alarm (snooze)
             if self.__alarmIsActivated and self.__alarmIsRunning and self.__alarmIsPaused and not self.__alarmIsStopped:
                 self.__alarmManager.pauseAlarm()
+                self.__snoozeTime = datetime.now() + datetime.delta(minutes=9)
                 
             #Stopping the alarm
             if self.__alarmIsActivated and self.__alarmIsRunning and self.__alarmIsStopped:
