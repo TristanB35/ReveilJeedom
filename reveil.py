@@ -34,7 +34,7 @@ class main:
         self.udpReceiver = UDPReceiver(self, self.__display)
         self.udpReceiver.start()
 
-        self.__alarmManager = Alarm(self)
+        self.__alarmManager = Alarm()
         self.__alarmManager.start()
 
         self.__buttonHandler = ButtonHandler(self)
