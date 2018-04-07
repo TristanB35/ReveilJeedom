@@ -26,9 +26,11 @@ class ButtonHandler(Thread):
 
     def click(self):
         if datetime.now() - self.__lastClickTime > datetime.timedelta(500):
-            self.__lastClickTime = datetime.now()
-            self.__parent.setAlarmIsPaused(True)
+            if self.__parent.getAlarmIsRunning():
+                self.__lastClickTime = datetime.now()
+                self.__parent.setAlarmIsPaused(True)
         else:
+            if self.__parent.getAlarmIsRunning() or self.__parent.getAlarmIsPaused():
             self.__doubleClick()
 
     def doubleClick(self):
