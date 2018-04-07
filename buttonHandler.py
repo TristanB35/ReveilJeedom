@@ -20,12 +20,12 @@ class ButtonHandler(Thread):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         while True:
-            if not GPIO.input(17):
+            if GPIO.input(17):
                 self.click()
             time.sleep(0.05)
 
     def click(self):
-        if datetime.now() - self.__lastClickTime > datetime.delta(500):
+        if datetime.now() - self.__lastClickTime > datetime.timedelta(500):
             self.__lastClickTime = datetime.now()
             self.__parent.setAlarmIsPaused(True)
         else:
