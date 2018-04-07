@@ -13,9 +13,10 @@ class ButtonHandler(Thread):
     def __init__(self, parent):
         Thread.__init__(self)
         self.__parent = parent
-        self.__lastClickTime = 0
+        self.__lastClickTime = None
 
     def run(self):
+        self.__lastClickTime = datetime.now()
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         while True:
@@ -25,6 +26,7 @@ class ButtonHandler(Thread):
 
     def click(self):
         if datetime.now() - self.__lastClickTime > 1000:
+            self.__lastClickTime = datetime.now()
             self.__parent.setAlarmIsPaused(True)
         else:
             self.__doubleClick()
