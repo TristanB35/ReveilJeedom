@@ -19,7 +19,7 @@ class ButtonHandler(Thread):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         while True:
-            if GPIO.input(17):
+            if not GPIO.input(17):
                 self.click()
             time.sleep(0.05)
 
