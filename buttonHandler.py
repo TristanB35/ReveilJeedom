@@ -22,17 +22,18 @@ class ButtonHandler(Thread):
         while True:
             if not GPIO.input(17):
                 self.click()
-                time.sleep(0.15)
+                time.sleep(0.2)
                 print("Click")
 
     def click(self):
-        if self.__lastClickTime - datetime.now() > timedelta(500):
-            if self.__parent.getAlarmIsRunning():
-                self.__lastClickTime = datetime.now()
-                self.__parent.setAlarmIsPaused(True)
-        else:
-            if self.__parent.getAlarmIsRunning() or self.__parent.getAlarmIsPaused():
-                self.doubleClick()
+        if self.__lastClickTime - datetime.now() < timedelta(300):
+            if self.__lastClickTime - datetime.now() > timedelta(700):
+                if self.__parent.getAlarmIsRunning():
+                    self.__lastClickTime = datetime.now()
+                    self.__parent.setAlarmIsPaused(True)
+            else:
+                if self.__parent.getAlarmIsRunning() or self.__parent.getAlarmIsPaused():
+                    self.doubleClick()
 
     def doubleClick(self):
         self.__parent.setAlarmIsStopped(True)
