@@ -22,8 +22,8 @@ class ButtonHandler(Thread):
         while True:
             if not GPIO.input(17):
                 self.click()
+                time.sleep(0.05)
                 print("Click")
-            time.sleep(0.05)
 
     def click(self):
         if datetime.now() - self.__lastClickTime > datetime.timedelta(500):
