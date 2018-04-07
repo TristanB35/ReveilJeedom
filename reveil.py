@@ -45,11 +45,11 @@ class main:
         self.__display.setWhatToDisplay("clock")
         
         while True:
-            self.__time = time.strftime("%H:%M")
+            self.__time = time.strftime("%H:%M:%S")
             self.__display.setTime(time.strftime("%H:%M"))
 
             #Sounding the alarm
-            if (self.__time == self.__alarm[0:5]) and self.__alarmIsActivated and self.__alarmIsStopped and not self.__alarmIsRunning and not self.__alarmIsPaused:
+            if (self.__time == self.__alarm[0:5]+":00") and self.__alarmIsActivated and self.__alarmIsStopped and not self.__alarmIsRunning and not self.__alarmIsPaused:
                 self.__alarmIsRunning = True
                 self.__alarmIsStopped = False
                 self.__alarmManager.playAlarm()
