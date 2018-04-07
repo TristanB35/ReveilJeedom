@@ -25,7 +25,7 @@ class ButtonHandler(Thread):
             time.sleep(0.05)
 
     def click(self):
-        if datetime.now() - self.__lastClickTime > 1000:
+        if datetime.now() - self.__lastClickTime > datetime.delta(500):
             self.__lastClickTime = datetime.now()
             self.__parent.setAlarmIsPaused(True)
         else:
