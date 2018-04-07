@@ -51,6 +51,7 @@ class main:
             #Sounding the alarm
             if (self.__time == self.__alarm[0:5]) and self.__alarmIsActivated and self.__alarmIsStopped and not self.__alarmIsRunning and not self.__alarmIsPaused:
                 self.__alarmIsRunning = True
+                self.__alarmIsStopped = False
                 self.__alarmManager.playAlarm()
                 print("Alarm is running")
                 

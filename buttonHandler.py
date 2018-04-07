@@ -22,6 +22,7 @@ class ButtonHandler(Thread):
         while True:
             if GPIO.input(17):
                 self.click()
+                print("Click")
             time.sleep(0.05)
 
     def click(self):
