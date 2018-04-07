@@ -53,22 +53,9 @@ class main:
                 self.__alarmIsRunning = True
                 self.__alarmManager.playAlarm()
                 print("Alarm is running")
-
-            #Pausing the alarm (snooze)
-            if self.__alarmIsActivated and self.__alarmIsRunning and self.__alarmIsPaused and not self.__alarmIsStopped:
-                self.__alarmManager.pauseAlarm()
-                self.__snoozeTime = datetime.now() + datetime.delta(minutes=9)
-                print("Alarm is paused")
-                
-            #Stopping the alarm
-            if self.__alarmIsActivated and self.__alarmIsRunning and self.__alarmIsStopped:
-                self.__alarmIsRunning = False
-                self.__alarmIsPaused = False
-                self.__alarmManager.stopAlarm()
-                print("Alarm is stopped")
                 
             #Setting the volume
-            if self.__alarmIsRunning:
+            if self.__alarmIsRunning and not self.__alarmIsPaused:
                 self.__volume += 0.01
                 self.__alarmManager.setVolume(self.__volume)
 
@@ -105,9 +92,24 @@ class main:
 
     def setAlarmIsPaused(self, paused):
         self.__alarmIsPaused = paused
+        if paused:
+            self.__alarmManager.pauseAlarm()
+            self.__snoozeTime = datetime.now() + datetime.timedelta(minutes=9)
+            print("Alarm is paused")
 
     def setAlarmIsStopped(self, stopped):
         self.__alarmIsStopped = stopped
+        if stopped:
+            self.__alarmIsRunning = False
+            self.__alarmIsPaused = False
+            self.__alarmManager.stopAlarm()
+            print("Alarm is stopped")
+
+    def getAlarmIsRunning(self):
+        return self.__alarmIsRunning
+
+    def getAlarmIsPaused(self):
+        return self.__alarmIsPaused
 
 if __name__ == "__main__":
     main()
